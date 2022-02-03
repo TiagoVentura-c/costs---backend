@@ -11,15 +11,18 @@ public class ServiceDto implements Serializable {
     private String  name;
     private String description;
     private double cost;
+    private ProjectDto projectDto;
 
     public ServiceDto() {
     }
+
     public ServiceDto(Service service) {
         this.id = service.getId();
         this.description = service.getDescription();
         this.name = service.getName();
         this.cost = service.getCost();
     }
+
     public ServiceDto(Long id, String name, String description, double cost) {
         this.id = id;
         this.name = name;
@@ -57,5 +60,13 @@ public class ServiceDto implements Serializable {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public ProjectDto getProjectDto() {
+        return projectDto;
+    }
+
+    public void setProjectDto(ProjectDto projectDto) {
+        this.projectDto = projectDto;
     }
 }

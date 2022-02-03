@@ -30,7 +30,13 @@ public class Project implements Serializable {
 	private List<Service> servicies;
 
 	public Project(){
+	}
 
+	public Project(Long id, String name, double budget, Category category) {
+		this.id = id;
+		this.name = name;
+		this.budget = budget;
+		this.category = category;
 	}
 
 	public Long getId() {

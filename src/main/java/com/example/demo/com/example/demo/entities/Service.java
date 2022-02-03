@@ -16,6 +16,14 @@ public class Service implements Serializable {
     private String description;
     private double cost;
 
+    public Service(Long id, String name, String description, double cost, Project project) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.project = project;
+    }
+
     @ManyToOne
     @JoinColumn(name = "id_project")
     private Project project;

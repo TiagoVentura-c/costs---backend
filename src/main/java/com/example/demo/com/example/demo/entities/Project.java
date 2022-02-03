@@ -23,6 +23,7 @@ public class Project implements Serializable {
 	private double budget;
 
 	@JoinColumn(name = "id_category")
+	@ManyToOne
 	private Category category;
 
 	@OneToMany()

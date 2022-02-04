@@ -16,17 +16,25 @@ public class Service implements Serializable {
     private String description;
     private double cost;
 
-    public Service(Long id, String name, String description, double cost, Project project) {
+    private Long idProject;
+
+    public Service() {
+    }
+
+    public Service(Long id, String name, String description, double cost) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cost = cost;
-        this.project = project;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "id_project")
-    private Project project;
+    public Service(Long id, String name, String description, double cost, Long idProject) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.idProject = idProject;
+    }
 
     public Long getId() {
         return id;
@@ -60,11 +68,11 @@ public class Service implements Serializable {
         this.cost = cost;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getIdProject() {
+        return idProject;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setIdProject(Long idProject) {
+        this.idProject = idProject;
     }
 }

@@ -14,7 +14,7 @@ public class ProjectDto implements Serializable {
     private String name;
     private double budget;
     private Category category;
-    private List<ServiceDto> servicies;
+    private List<ServiceDto> services;
 
     public ProjectDto() {
     }
@@ -32,14 +32,13 @@ public class ProjectDto implements Serializable {
         this.name = project.getName();
         this.category = project.getCategory();
 
-        this.servicies = project.getServicies().stream().
+        this.services = project.getServices().stream().
                 map(service -> new ServiceDto(service)).collect(Collectors.toList());
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -68,11 +67,11 @@ public class ProjectDto implements Serializable {
         this.category = category;
     }
 
-    public List<ServiceDto> getServicies() {
-        return servicies;
+    public List<ServiceDto> getServices() {
+        return services;
     }
 
-    public void setServicies(List<ServiceDto> servicies) {
-        this.servicies = servicies;
+    public void setServices(List<ServiceDto> services) {
+        this.services = services;
     }
 }

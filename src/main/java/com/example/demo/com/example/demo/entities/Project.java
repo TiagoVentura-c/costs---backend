@@ -1,6 +1,7 @@
 package com.example.demo.com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -13,8 +14,7 @@ public class Project implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,7 +27,8 @@ public class Project implements Serializable {
 	private Category category;
 
 	@OneToMany()
-	private List<Service> servicies;
+	@JoinColumn(name = "idProject")
+	private List<Service> services = new ArrayList<>();
 
 	public Project(){
 	}
@@ -71,11 +72,11 @@ public class Project implements Serializable {
 		this.category = category;
 	}
 
-	public List<Service> getServicies() {
-		return servicies;
+	public List<Service> getServices() {
+		return services;
 	}
 
-	public void setServicies(List<Service> servicies) {
-		this.servicies = servicies;
+	public void setServices(List<Service> services) {
+		this.services = services;
 	}
 }

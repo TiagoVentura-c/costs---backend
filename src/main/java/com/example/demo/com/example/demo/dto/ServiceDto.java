@@ -1,6 +1,7 @@
 package com.example.demo.com.example.demo.dto;
 
 import com.example.demo.com.example.demo.entities.Service;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
@@ -11,7 +12,8 @@ public class ServiceDto implements Serializable {
     private String  name;
     private String description;
     private double cost;
-    private ProjectDto projectDto;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Long projectId;
 
     public ServiceDto() {
     }
@@ -21,6 +23,7 @@ public class ServiceDto implements Serializable {
         this.description = service.getDescription();
         this.name = service.getName();
         this.cost = service.getCost();
+        this.projectId = service.getIdProject();
     }
 
     public ServiceDto(Long id, String name, String description, double cost) {
@@ -28,6 +31,14 @@ public class ServiceDto implements Serializable {
         this.name = name;
         this.description = description;
         this.cost = cost;
+    }
+
+    public ServiceDto(Long id, String name, String description, double cost, Long projectId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.projectId = projectId;
     }
 
     public Long getId() {
@@ -62,11 +73,11 @@ public class ServiceDto implements Serializable {
         this.cost = cost;
     }
 
-    public ProjectDto getProjectDto() {
-        return projectDto;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProjectDto(ProjectDto projectDto) {
-        this.projectDto = projectDto;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }

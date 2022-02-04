@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceService {
-    @Autowired
+
+    /*@Autowired
     private ServiceRepository repository;
 
     public ServiceDto save(ServiceDto dto){
-
         Project project = new Project();
         project.setId(dto.getProjectDto().getId());
         com.example.demo.com.example.demo.entities.Service service = new com.example.demo.com.example.demo.entities
                 .Service(null, dto.getName(), dto.getDescription(), dto.getCost(), project);
 
         return new ServiceDto(repository.save(service));
-    }
+    }*/
 }

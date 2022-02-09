@@ -5,6 +5,7 @@ import com.example.demo.com.example.demo.dto.ServiceDto;
 import com.example.demo.com.example.demo.entities.Project;
 import com.example.demo.com.example.demo.repositories.ProjectRepository;
 import com.example.demo.com.example.demo.repositories.ServiceRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,17 @@ public class ProjectService {
 
     @Transactional
     public ProjectDto saveProject(ProjectDto dto){
-        Project project = new Project(null, dto.getName(), dto.getBudget(), dto.getCategory());
+        Project project = new Project(dto.getId(), dto.getName(), dto.getBudget(), dto.getCategory());
         project = repository.save(project);
 
+        if(dto.getServices() != null)
         for (ServiceDto sDto: dto.getServices()){
             com.example.demo.com.example.demo.entities.Service service =
                     new com.example.demo.com.example.demo.entities.Service
                             (null, sDto.getName(), sDto.getDescription(), sDto.getCost(), project.getId());
              project.getServices().add(serviceRepository.save(service));
         }
-        return new ProjectDto(project);
+        return new ProjectDto(repository.getById(project.getId()));
     }
 
     @Transactional
@@ -56,5 +58,32 @@ public class ProjectService {
         return listDto;
     }
 
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
 
+    @Transactional
+    public ProjectDto getOne(Long id) {
+        Project project = repository.getById(id);
+        ProjectDto projectDto = new ProjectDto(project);
+        return  projectDto;
+
+    }
+
+    @Transactional
+    public ProjectDto updateProject(ProjectDto dtoSource){
+        Project project = repository.getById(dtoSource.getId());
+        ProjectDto dtoTarget = new ProjectDto(project);
+
+        BeanUtils.copyProperties(dtoSource, dtoTarget);
+/*
+            for (ServiceDto sDto: dtoSource.getServices()){
+                com.example.demo.com.example.demo.entities.Service service =
+                        new com.example.demo.com.example.demo.entities.Service
+                                (null, sDto.getName(), sDto.getDescription(), sDto.getCost(), project.getId());
+                project.getServices().add(serviceRepository.save(service));
+            }*/
+        return new ProjectDto(repository.getById(project.getId()));
+    }
 }

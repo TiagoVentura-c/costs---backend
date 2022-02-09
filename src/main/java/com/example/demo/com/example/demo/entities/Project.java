@@ -79,4 +79,15 @@ public class Project implements Serializable {
 	public void setServices(List<Service> services) {
 		this.services = services;
 	}
+
+	@Override
+	public String toString() {
+		return "Project{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", budget=" + budget +
+				", category=" + category +
+				", services=" + services +
+				'}';
+	}
 }

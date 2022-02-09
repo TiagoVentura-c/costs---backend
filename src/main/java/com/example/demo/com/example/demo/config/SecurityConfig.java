@@ -1,5 +1,5 @@
 package com.example.demo.com.example.demo.config;
-
+/*
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+@EnableWebSecurity*/
+public class SecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
+/*
 	@Autowired
 	private Environment env;
 
@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.cors().and().csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 		http.authorizeRequests().anyRequest().permitAll();
 	}
 
@@ -42,6 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		source.registerCorsConfiguration("/**", configuration);
 
 		return source;
-	}
+	}*/
 
 }

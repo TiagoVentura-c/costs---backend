@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -15,18 +16,18 @@ public class ProjectController {
     private ProjectService service;
 
     @PostMapping
-    public ProjectDto save(@RequestBody ProjectDto projectDto){
-        return service.saveProject(projectDto);
+    public ProjectDto save(@RequestBody ProjectDto projectDto, Principal principal){
+        return service.saveProject(projectDto, principal.getName());
     }
 
     @GetMapping
-    public List<ProjectDto> getAll(){
-        return service.getAll();
+    public List<ProjectDto> getAll(Principal principal){
+        return service.getAll(principal.getName());
     }
 
     @PutMapping
-    public  ProjectDto update(@RequestBody ProjectDto projectDto){
-        return service.saveProject(projectDto);
+    public  ProjectDto update(@RequestBody ProjectDto projectDto,  Principal principal){
+        return service.saveProject(projectDto, principal.getName());
     }
 
     @GetMapping("/{id}")
@@ -39,6 +40,7 @@ public class ProjectController {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
+
 
 
 }

@@ -26,6 +26,8 @@ public class Project implements Serializable {
 	@ManyToOne
 	private Category category;
 
+	private Long idUser;
+
 	@OneToMany()
 	@JoinColumn(name = "idProject")
 	private List<Service> services = new ArrayList<>();
@@ -33,11 +35,21 @@ public class Project implements Serializable {
 	public Project(){
 	}
 
-	public Project(Long id, String name, double budget, Category category) {
+	public Project(Long id, String name, double budget, Category category, Long idUser) {
 		this.id = id;
 		this.name = name;
 		this.budget = budget;
 		this.category = category;
+		this.idUser = idUser;
+	}
+
+
+	public Long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	public Long getId() {

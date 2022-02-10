@@ -3,8 +3,10 @@ package com.example.demo.com.example.demo.services;
 import com.example.demo.com.example.demo.dto.ProjectDto;
 import com.example.demo.com.example.demo.dto.ServiceDto;
 import com.example.demo.com.example.demo.entities.Project;
+import com.example.demo.com.example.demo.entities.User;
 import com.example.demo.com.example.demo.repositories.ProjectRepository;
 import com.example.demo.com.example.demo.repositories.ServiceRepository;
+import com.example.demo.com.example.demo.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,13 @@ public class ProjectService {
     private ProjectRepository repository;
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
-    public ProjectDto saveProject(ProjectDto dto){
-        Project project = new Project(dto.getId(), dto.getName(), dto.getBudget(), dto.getCategory());
+    public ProjectDto saveProject(ProjectDto dto, String name){
+        User user = userRepository.findByLogin(name).get();
+        Project project = new Project(dto.getId(), dto.getName(), dto.getBudget(), dto.getCategory(), user.getId());
         project = repository.save(project);
 
         if(dto.getServices() != null)
@@ -50,8 +55,10 @@ public class ProjectService {
     }
 
     @Transactional
-    public List<ProjectDto> getAll(){
-        List<Project> list = repository.findAll();
+    public List<ProjectDto> getAll(String name){
+        User user = userRepository.findByLogin(name).get();
+
+        List<Project> list = user.getProjects();
         List<ProjectDto> listDto = new ArrayList<>();
         for(Project p: list)
             listDto.add(new ProjectDto(p));

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
@@ -19,8 +21,11 @@ public class User implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
-
     private String name;
+
+    @OneToMany()
+    @JoinColumn(name = "idUser")
+    private List<Project> projects = new ArrayList<>();
 
     public User() {
     }
@@ -30,6 +35,22 @@ public class User implements Serializable {
         this.login = login;
         this.password = password;
         this.name = name;
+    }
+
+    public User(Long id, String login, String password, String name, List<Project> projects) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.projects = projects;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     public Long getId() {

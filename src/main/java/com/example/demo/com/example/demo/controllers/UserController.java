@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping
 public class UserController {
@@ -17,8 +19,8 @@ public class UserController {
     private UserRepository repository;
 
     @GetMapping(value = "/api/user")
-    public String get(){
-        return "Acessou";
+    public ResponseEntity<String> get(Principal principal){
+        return ResponseEntity.ok(repository.findByLogin(principal.getName()).get().getName());
     }
 
     @PostMapping("/signin")
@@ -28,5 +30,4 @@ public class UserController {
         usuario.setPassword(encoder.encode(usuario.getPassword()));
         return ResponseEntity.ok(repository.save(usuario));
     }
-
 }

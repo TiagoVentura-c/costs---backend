@@ -22,8 +22,8 @@ public class UserController {
     public ResponseEntity<String> get(Principal principal){
         return ResponseEntity.ok(repository.findByLogin(principal.getName()).get().getName());
     }
- 
-    @PostMapping("/signin")
+
+    @PostMapping("/register")
     public ResponseEntity<User> salvar(@RequestBody User usuario) {
         if(!repository.findByLogin(usuario.getLogin()).isEmpty())
             return ResponseEntity.badRequest().build();
